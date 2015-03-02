@@ -1,0 +1,31 @@
+{
+  "name": "scale-normalised",
+  "version": "1.0.0",
+  "description": "Scale normalised data",
+  "main": "src/scale.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/javiercejudo/scale"
+  },
+  "keywords": [
+    "feature scaling",
+    "normalisation",
+    "normalization",
+    "scale",
+    "rescale"
+  ],
+  "author": "Javier Cejudo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/javiercejudo/scale/issues"
+  },
+  "homepage": "https://github.com/javiercejudo/scale",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-mocha": "^2.0.0",
+    "should": "^5.0.0"
+  }
+}
