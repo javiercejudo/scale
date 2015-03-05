@@ -1,4 +1,6 @@
-# scale [![Build Status](https://travis-ci.org/javiercejudo/scale.svg)](https://travis-ci.org/javiercejudo/scale)
+# scale
+
+[![Build Status](https://travis-ci.org/javiercejudo/scale.svg)](https://travis-ci.org/javiercejudo/scale)
 
 Scale normalised data
 
