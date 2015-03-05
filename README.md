@@ -4,7 +4,7 @@ Scale normalised data
 
 ## Install
 
-    npm install --save-dev scale-normalised
+    npm i scale-normalised
 
 ## Usage
 
