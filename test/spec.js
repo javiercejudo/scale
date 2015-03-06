@@ -1,3 +1,7 @@
+/*jshint node:true, mocha:true */
+
+'use strict';
+
 var should = require('should');
 var sinon = require('sinon');
 var rescaleUtil = require('rescale-util');
@@ -11,25 +15,54 @@ describe('scaling', function() {
     });
   });
 
+  describe('with a scale', function() {
+    var rescaleUtilMock;
+
+    afterEach(function () {
+      rescaleUtilMock.verify();
+    });
+
+    it('should delegate its validation to rescale-util', function() {
+      rescaleUtilMock = sinon.mock(rescaleUtil);
+
+      rescaleUtilMock.expects('isValidScale')
+        .withExactArgs([0, 5]).returns(true);
+
+      rescaleUtilMock.expects('isValidScale')
+        .withExactArgs([-5, 1]).returns(true);
+
+      scale(2.5, [0, 5]);
+      scale(-3, [-5, 1]);
+    });
+  });
+
   describe('with valid scales', function() {
+    var isValidScaleStub;
+
     beforeEach(function() {
-      sinon.stub(rescaleUtil, 'isValidScale').returns(true);
+      isValidScaleStub = sinon.stub(rescaleUtil, 'isValidScale');
+      isValidScaleStub.returns(true);
     });
 
     afterEach(function() {
-      rescaleUtil.isValidScale.restore();
+      isValidScaleStub.restore();
     });
 
     it('should scale normalised data', function() {
-      scale(.5, [2, 4]).should.be.exactly(3);
-      scale(-.25, [-3, 5]).should.be.exactly(-5);
+      scale(0.5, [2, 4]).should.be.exactly(3);
+      scale(-0.25, [-3, 5]).should.be.exactly(-5);
     });
   });
 
   describe('with invalid scales', function() {
+    var isValidScaleStub, getLastErrorStub;
+
     beforeEach(function() {
-      sinon.stub(rescaleUtil, 'isValidScale').returns(false);
-      sinon.stub(rescaleUtil, 'getLastError').returns('an error');
+      isValidScaleStub = sinon.stub(rescaleUtil, 'isValidScale');
+      getLastErrorStub = sinon.stub(rescaleUtil, 'getLastError');
+
+      isValidScaleStub.returns(false);
+      getLastErrorStub.returns('an error');
     });
 
     afterEach(function() {

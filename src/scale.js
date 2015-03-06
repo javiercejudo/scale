@@ -1,3 +1,5 @@
+/*jshint node:true */
+
 'use strict';
 
 var rescaleUtil = require('rescale-util');
@@ -12,4 +14,4 @@ exports.scale = function scale(x, scale) {
   }
 
   return scale[0] + x * (scale[1] - scale[0]);
-}
+};
