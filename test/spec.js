@@ -66,8 +66,8 @@ describe('scaling', function() {
     });
 
     afterEach(function() {
-      rescaleUtil.isValidScale.restore();
-      rescaleUtil.getLastError.restore();
+      isValidScaleStub.restore();
+      getLastErrorStub.restore();
     });
 
     it('should throw an error', function() {
