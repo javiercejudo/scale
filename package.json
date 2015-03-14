@@ -1,6 +1,6 @@
 {
   "name": "scale-normalised",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Scale normalised data",
   "main": "src/scale.js",
   "scripts": {
