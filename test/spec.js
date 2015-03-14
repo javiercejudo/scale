@@ -73,7 +73,7 @@ describe('scaling', function() {
     it('should throw an error', function() {
       (function() {
         scale(2, 2);
-      }).should.throw('an error');
+      }).should.throw(rescaleUtil.RescaleError, {message: 'an error'});
     });
   });
 });

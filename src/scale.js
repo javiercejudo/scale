@@ -3,6 +3,7 @@
 'use strict';
 
 var rescaleUtil = require('rescale-util');
+var RescaleError = rescaleUtil.RescaleError;
 
 exports.scale = function scale(x, scale) {
   if (typeof scale === 'undefined') {
@@ -10,7 +11,7 @@ exports.scale = function scale(x, scale) {
   }
 
   if (!rescaleUtil.isValidScale(scale)) {
-    throw new Error(rescaleUtil.getLastError());
+    throw new RescaleError(rescaleUtil.getLastError());
   }
 
   return scale[0] + x * (scale[1] - scale[0]);
