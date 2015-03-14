@@ -20,7 +20,7 @@ scale(-.25, [-3, 5]); // => returns -5
 
 scale(Math.E); // => Math.E
 
-scale(-3, 'invalid scale'); // => Error
+scale(-3, 'invalid scale'); // => RescaleError
 ```
 
 See [spec](test/spec.js).
