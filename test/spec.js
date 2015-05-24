@@ -5,6 +5,8 @@
 var should = require('should');
 var sinon = require('sinon');
 var rescaleUtil = require('rescale-util');
+var big = require('big.js');
+var arbitraryPrecision = require('rescale-arbitrary-precision');
 var scale = require('../src/scale.js').scale;
 
 describe('scaling', function() {
@@ -48,9 +50,40 @@ describe('scaling', function() {
       isValidScaleStub.restore();
     });
 
-    it('should scale normalised data', function() {
-      scale(0.5, [2, 4]).should.be.exactly(3);
-      scale(-0.25, [-3, 5]).should.be.exactly(-5);
+    describe('when big.js is available', function() {
+      var hasArbitraryPrecisionStub;
+
+      beforeEach(function() {
+        hasArbitraryPrecisionStub = sinon.stub(arbitraryPrecision, 'isAvailable');
+        hasArbitraryPrecisionStub.returns(true);
+      });
+
+      afterEach(function() {
+        hasArbitraryPrecisionStub.restore();
+      });
+
+      it('should work with arbitrary precision', function() {
+        scale(0.5, [0.1, 0.5]).should.eql(big(0.3));
+        scale(-0.25, [-3, 5]).should.eql(big(-5));
+      });
+    });
+
+    describe('when big.js is unavailable', function() {
+      var hasArbitraryPrecisionStub;
+
+      beforeEach(function() {
+        hasArbitraryPrecisionStub = sinon.stub(arbitraryPrecision, 'isAvailable');
+        hasArbitraryPrecisionStub.returns(false);
+      });
+
+      afterEach(function() {
+        hasArbitraryPrecisionStub.restore();
+      });
+
+      it('should work with floating-point numbers', function() {
+        scale(0.5, [0.1, 0.5]).should.be.exactly(0.30000000000000004);
+        scale(-0.25, [-3, 5]).should.be.exactly(-5);
+      });
     });
   });
 

@@ -3,7 +3,10 @@
 'use strict';
 
 var rescaleUtil = require('rescale-util');
+var arbitraryPrecision = require('rescale-arbitrary-precision');
+
 var RescaleError = rescaleUtil.RescaleError;
+var decimal = arbitraryPrecision.load();
 
 exports.scale = function scaleNormalised(x, scale) {
   if (typeof scale === 'undefined') {
@@ -14,5 +17,17 @@ exports.scale = function scaleNormalised(x, scale) {
     throw new RescaleError(rescaleUtil.getLastError());
   }
 
-  return scale[0] + x * (scale[1] - scale[0]);
+  if (arbitraryPrecision.isAvailable()) {
+    return scaleDecimal(x, scale);
+  }
+
+  return scaleNative(x, scale);
 };
+
+function scaleDecimal(x, scale) {
+  return decimal(scale[1]).minus(scale[0]).times(x).plus(scale[0]);
+}
+
+function scaleNative(x, scale) {
+  return scale[0] + x * (scale[1] - scale[0]);
+}
