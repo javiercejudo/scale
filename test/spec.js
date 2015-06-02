@@ -5,14 +5,13 @@
 var should = require('should');
 var sinon = require('sinon');
 var rescaleUtil = require('rescale-util');
-var big = require('big.js');
 var arbitraryPrecision = require('rescale-arbitrary-precision');
-var scale = require('../src/scale.js').scale;
+var scale = require('../src/scale').scale;
 
 describe('scaling', function() {
   describe('without a scale', function() {
     it('should be the identity', function() {
-      scale(1).should.be.exactly(1);
+      scale(42).should.be.exactly(42);
       scale(Math.E).should.be.exactly(Math.E);
     });
   });
