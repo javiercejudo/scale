@@ -63,8 +63,8 @@ describe('scaling', function() {
       });
 
       it('should work with arbitrary precision', function() {
-        scale(0.5, [0.1, 0.5]).should.eql(big(0.3));
-        scale(-0.25, [-3, 5]).should.eql(big(-5));
+        scale(0.5, [0.1, 0.5]).should.be.exactly(0.3);
+        scale(-0.25, [-3, 5]).should.be.exactly(-5);
       });
     });
 

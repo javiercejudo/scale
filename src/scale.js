@@ -18,7 +18,7 @@ exports.scale = function scaleNormalised(x, scale) {
   }
 
   if (arbitraryPrecision.isAvailable()) {
-    return scaleDecimal(x, scale);
+    return Number(scaleDecimal(x, scale));
   }
 
   return scaleNative(x, scale);
