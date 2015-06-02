@@ -5,6 +5,7 @@
 var should = require('should');
 var sinon = require('sinon');
 var rescaleUtil = require('rescale-util');
+var big = require('big.js');
 var arbitraryPrecision = require('rescale-arbitrary-precision');
 var scale = require('../src/scale').scale;
 
@@ -64,6 +65,7 @@ describe('scaling', function() {
       it('should work with arbitrary precision', function() {
         scale(0.5, [0.1, 0.5]).should.be.exactly(0.3);
         scale(-0.25, [-3, 5]).should.be.exactly(-5);
+        scale(big(-2).div(3), [0, -9]).should.be.exactly(6);
       });
     });
 
@@ -82,6 +84,7 @@ describe('scaling', function() {
       it('should work with floating-point numbers', function() {
         scale(0.5, [0.1, 0.5]).should.be.exactly(0.30000000000000004);
         scale(-0.25, [-3, 5]).should.be.exactly(-5);
+        scale(-2/3, [0, -9]).should.be.exactly(6);
       });
     });
   });
