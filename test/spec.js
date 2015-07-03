@@ -19,7 +19,7 @@ describe('scaling', function() {
   });
 
   describe('with valid scales', function() {
-    describe('when big.js is available', function() {
+    describe('when arbitrary precision is available', function() {
       var hasArbitraryPrecisionStub;
 
       beforeEach(function() {
@@ -38,7 +38,7 @@ describe('scaling', function() {
       });
     });
 
-    describe('when big.js is unavailable', function() {
+    describe('when arbitrary precision is unavailable', function() {
       var hasArbitraryPrecisionStub;
 
       beforeEach(function() {
