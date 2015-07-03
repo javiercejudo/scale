@@ -4,11 +4,11 @@
   "description": "Scale normalised data",
   "main": "src/scale.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "node_modules/rescale-arbitrary-precision/scripts/tester.sh"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/javiercejudo/scale"
+    "url": "git+https://github.com/javiercejudo/scale"
   },
   "keywords": [
     "feature scaling",
@@ -17,14 +17,13 @@
     "scale",
     "rescale"
   ],
-  "author": "Javier Cejudo",
+  "author": "Javier Cejudo <javier@javiercejudo.com> (http://www.javiercejudo.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/javiercejudo/scale/issues"
   },
-  "homepage": "https://github.com/javiercejudo/scale",
+  "homepage": "https://github.com/javiercejudo/scale#readme",
   "devDependencies": {
-    "big.js": "^3.0.2",
     "gulp": "^3.8.11",
     "gulp-coveralls": "^0.1.3",
     "gulp-istanbul": "^0.6.0",
@@ -34,9 +33,11 @@
     "sinon": "^1.13.0"
   },
   "dependencies": {
-    "rescale-arbitrary-precision": "^1.0.1"
+    "rescale-arbitrary-precision": "^1.2.0"
   },
   "optionalDependencies": {
-    "big.js": "^3.0.2"
+    "big.js": "^3.0.2",
+    "bignumber.js": "^2.0.7",
+    "decimal.js": "^4.0.2"
   }
 }

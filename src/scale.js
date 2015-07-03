@@ -4,7 +4,7 @@
 
 var arbitraryPrecision = require('rescale-arbitrary-precision');
 
-var decimal = arbitraryPrecision.load();
+var Decimal = arbitraryPrecision.load();
 
 exports.scale = function scaleNormalised(x, scale) {
   if (typeof scale === 'undefined') {
@@ -19,7 +19,7 @@ exports.scale = function scaleNormalised(x, scale) {
 };
 
 function scaleDecimal(x, scale) {
-  return decimal(scale[1]).minus(scale[0]).times(x).plus(scale[0]);
+  return new Decimal(scale[1]).minus(scale[0]).times(x).plus(scale[0]);
 }
 
 function scaleNative(x, scale) {
