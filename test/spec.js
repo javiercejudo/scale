@@ -19,7 +19,7 @@ describe('scaling', function() {
   });
 
   describe('with valid scales', function() {
-    describe('when arbitrary precision is available', function() {
+    describe('when ' + decimalDep + ' is available', function() {
       var hasArbitraryPrecisionStub;
 
       beforeEach(function() {
@@ -38,7 +38,7 @@ describe('scaling', function() {
       });
     });
 
-    describe('when arbitrary precision is unavailable', function() {
+    describe('when ' + decimalDep + ' is unavailable', function() {
       var hasArbitraryPrecisionStub;
 
       beforeEach(function() {
