@@ -2,26 +2,25 @@
 
 'use strict';
 
-var arbitraryPrecision = require('rescale-arbitrary-precision');
+var arbitraryPrecision = require('linear-arbitrary-precision');
+var isUndefined = require('lodash.isundefined');
 
-var Decimal = arbitraryPrecision.load();
+module.exports = function factory(adapter) {
+  var Decimal = arbitraryPrecision(adapter);
+  var api = {};
 
-exports.scale = function scaleNormalised(x, scale) {
-  if (typeof scale === 'undefined') {
-    return x;
-  }
+  api.scale = function scaleNormalised(x, scale) {
+    if (isUndefined(scale)) {
+      return x;
+    }
 
-  if (arbitraryPrecision.isAvailable()) {
-    return Number(scaleDecimal(x, scale));
-  }
+    var scale0 = new Decimal(scale[0].toString());
 
-  return scaleNative(x, scale);
-};
+    return Number(
+      new Decimal(scale[1].toString()).minus(scale0)
+        .times(new Decimal(x.toString())).plus(scale0)
+    );
+  };
 
-function scaleDecimal(x, scale) {
-  return new Decimal(scale[1]).minus(scale[0]).times(x).plus(scale[0]);
-}
-
-function scaleNative(x, scale) {
-  return scale[0] + x * (scale[1] - scale[0]);
+  return api;
 }
