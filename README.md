@@ -13,12 +13,13 @@ Scale normalised data
 ## Usage
 
 ```js
-var scale = require('scale-normalised')(require('floating-adapter')).scale;
+var Decimal = require('linear-arbitrary-precision')(require('floating-adapter'));
+var scale = require('scale-normalised')(Decimal).scale;
 
-scale(.5, [2, 4]); // => 3
-scale(-.25, [-3, 5]); // => returns -5
+scale(.5, [2, 4]); // => Decimal 3
+scale(-.25, [-3, 5]); // => Decimal -5
 
-scale(Math.E); // => Math.E
+scale(Math.E); // => Decimal Math.E
 ```
 
 See [spec](test/spec.js).
