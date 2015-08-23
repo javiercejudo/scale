@@ -8,9 +8,7 @@ module.exports = function factory(Decimal) {
   var api = {};
 
   api.scale = function scaleNormalised(x, scale) {
-    if (isUndefined(scale)) {
-      return x;
-    }
+    scale = scale || [0, 1];
 
     var scale0 = new Decimal(scale[0].toString());
 
@@ -19,4 +17,4 @@ module.exports = function factory(Decimal) {
   };
 
   return api;
-}
+};
