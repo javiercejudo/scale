@@ -15,6 +15,7 @@ describe('scaling', function() {
     var scale = scaleFactory(Decimal).scale;
 
     it('should return a decimal-ised version of the input', function() {
+      scale(0.5).equals(new Decimal('0.5')).should.be.exactly(true);
       scale(42).equals(new Decimal('42')).should.be.exactly(true);
       scale(Math.E).equals(new Decimal(String(Math.E))).should.be.exactly(true);
     });
