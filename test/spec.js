@@ -10,28 +10,17 @@ var floatingAdapter = require('floating-adapter');
 var scaleFactory = require('../src/scale');
 
 describe('scaling', function() {
-  describe('without a scale', function() {
-    var Decimal = arbitraryPrecision(floatingAdapter);
-    var scale = scaleFactory(Decimal).scale;
-
-    it('should return a decimal-ised version of the input', function() {
-      scale(0.5).equals(new Decimal('0.5')).should.be.exactly(true);
-      scale(42).equals(new Decimal('42')).should.be.exactly(true);
-      scale(Math.E).equals(new Decimal(String(Math.E))).should.be.exactly(true);
-    });
-  });
-
   describe('with valid scales', function() {
     describe('should support', function() {
       var Decimal = arbitraryPrecision(floatingAdapter);
       var scale = scaleFactory(Decimal).scale;
 
       it('native numbers', function() {
-        scale(-2/3, [0, -9]).equals(new Decimal('6')).should.be.exactly(true);
+        scale([0, -9], -2/3).equals(new Decimal('6')).should.be.exactly(true);
       });
 
       it('as well as Decimal numbers', function() {
-        scale(new Decimal('-2').div(new Decimal('3')), [0, -9]).equals(new Decimal('6'))
+        scale([0, -9], new Decimal('-2').div(new Decimal('3'))).equals(new Decimal('6'))
           .should.be.exactly(true);
       });
     });
@@ -44,10 +33,10 @@ describe('scaling', function() {
       var scale = scaleFactory(Decimal).scale;
 
       it('should work with arbitrary precision', function() {
-        scale(0.5, [0.1, 0.5]).equals(new Decimal('0.3')).should.be.exactly(true);
-        scale(-0.25, [-3, 5]).equals(new Decimal('-5')).should.be.exactly(true);
+        scale([0.1, 0.5], 0.5).equals(new Decimal('0.3')).should.be.exactly(true);
+        scale([-3, 5], -0.25).equals(new Decimal('-5')).should.be.exactly(true);
 
-        scale(new Decimal('-2').div(new Decimal('3')), [0, -9]).val().toFixed(50)
+        scale([0, -9], new Decimal('-2').div(new Decimal('3'))).val().toFixed(50)
           .should.be.exactly(new Decimal('6').val().toFixed(50));
       });
     });
@@ -57,9 +46,9 @@ describe('scaling', function() {
       var scale = scaleFactory(Decimal).scale;
 
       it('should work with floating-point numbers', function() {
-        scale(0.5, [0.1, 0.5]).equals(new Decimal('0.30000000000000004')).should.be.exactly(true);
-        scale(-0.25, [-3, 5]).equals(new Decimal('-5')).should.be.exactly(true);
-        scale(-2/3, [0, -9]).equals(new Decimal('6')).should.be.exactly(true);
+        scale([0.1, 0.5], 0.5).equals(new Decimal('0.30000000000000004')).should.be.exactly(true);
+        scale([-3, 5], -0.25).equals(new Decimal('-5')).should.be.exactly(true);
+        scale([0, -9], -2/3).equals(new Decimal('6')).should.be.exactly(true);
       });
     });
   });

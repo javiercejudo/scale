@@ -16,10 +16,8 @@ Scale normalised data
 var Decimal = require('linear-arbitrary-precision')(require('floating-adapter'));
 var scale = require('scale-normalised')(Decimal).scale;
 
-scale(.5, [2, 4]); // => Decimal 3
-scale(-.25, [-3, 5]); // => Decimal -5
-
-scale(Math.E); // => Decimal Math.E
+scale([2, 4], .5); // => Decimal 3
+scale([-3, 5], -.25); // => Decimal -5
 ```
 
 See [spec](test/spec.js).
