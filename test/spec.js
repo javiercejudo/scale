@@ -4,12 +4,23 @@
 
 require('should');
 
-var arbitraryPrecision = require('arbitrary-precision')
+var arbitraryPrecision = require('arbitrary-precision');
 var bigjsAdapter = require('bigjs-adapter');
 var floatingAdapter = require('floating-adapter');
 var scaleFactory = require('../src/scale');
 
 describe('scaling', function() {
+  describe('api', function() {
+    it('should be frozen', function() {
+      var Decimal = arbitraryPrecision(floatingAdapter);
+      var scale = scaleFactory(Decimal);
+
+      (function() {
+        scale.scale = function() {};
+      }).should.throw();
+    });
+  });
+
   describe('with valid scales', function() {
     describe('should support', function() {
       var Decimal = arbitraryPrecision(floatingAdapter);
